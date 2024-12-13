@@ -1,0 +1,24 @@
+# Zig build artifacts
+app/
+zig-cache/
+zig-out/
+/release/
+/debug/
+.zig-cache/
+.zig-out/
+# Build artifacts
+*.o
+*.obj
+*.exe
+*.pdb
+*.ilk
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
