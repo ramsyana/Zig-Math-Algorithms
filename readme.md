@@ -1,6 +1,6 @@
 # Zig Math Algorithms
 
-A comprehensive collection of mathematical algorithms implemented in Zig, designed to solve specific mathematical problems with easy-to-use command-line interfaces.
+A collection of mathematical algorithms implemented in Zig, designed to address specific mathematical problems with simple command-line interfaces.
 
 ## 🧮 Available Algorithms
 
