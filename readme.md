@@ -4,23 +4,23 @@ A comprehensive collection of mathematical algorithms implemented in Zig, design
 
 ## 🧮 Available Algorithms
 
-| Algorithm | Description | Command | Example Output |
-|-----------|-------------|---------|----------------|
-| Prime Number Checker | Checks if a number is prime | `zig run src/algorithm/math/prime_checker.zig` | 17 is prime. |
-| Armstrong Number Checker | Verifies Armstrong numbers | `zig run src/algorithm/math/is_armstrong.zig` | 153 is an Armstrong number. |
-| Strong Number Checker | Checks if sum of digit factorials equals the number | `zig run src/algorithm/math/strong_number_checker.zig` | 145 is a strong number! |
-| Fibonacci Number Calculator | Calculates nth Fibonacci number | `zig run src/algorithm/math/fibonacci.zig` | Fib(10) = 55 |
-| Factorial Calculator | Calculates factorial of a number | `zig run src/algorithm/math/factorial.zig` | 120 |
-| GCD and LCM Calculator | Finds Greatest Common Divisor and Least Common Multiple | `zig run src/algorithm/math/gcd_lcm_calculator.zig` | GCD: 5 |
-| Prime Factorization | Computes prime factors of a number | `zig run src/algorithm/math/prime_factorization.zig` | 2-3-5 |
-| Collatz Conjecture | Determines steps to reach 1 in Collatz sequence | `zig run src/algorithm/math/collatz_conjecture.zig` | Number of steps: 6 |
-| Cantor Set Generator | Generates Cantor set levels | `zig run src/algorithm/math/cantor_set.zig -- 0 1 3` | Levels of Cantor set |
-| Catalan Number Calculator | Calculates nth Catalan number | `zig run src/algorithm/math/catalan.zig` | 16796.00 |
-| Euclidean Algorithm | Finds GCD and coefficients | `zig run src/algorithm/math/euclidean_algorithm_extended.zig` | GCD: 1, x: -2, y: 3 |
-| Linear Interpolation | Performs linear interpolation | `zig run src/algorithm/math/linear_interpolation.zig` | lerp(0.0, 10.0, 0.5) = 5.0 |
-| Palindrome Number Checker | Checks if a number is a palindrome | `zig run src/algorithm/math/palindrome_number.zig` | 12321 is a palindrome number. |
-| Trailing Zeros in Factorial | Counts trailing zeros in factorial | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` | 6 trailing zeros in 25! |
-| Prime Counter | Counts primes less than a given number | `zig run src/algorithm/math/prime_counter.zig` | 4 primes less than 10 |
+| Algorithm | Description | Command |
+|-----------|-------------|---------|
+| Prime Number Checker | Checks if a number is prime | `zig run src/algorithm/math/prime_checker.zig` |
+| Armstrong Number Checker | Verifies Armstrong numbers | `zig run src/algorithm/math/is_armstrong.zig` |
+| Strong Number Checker | Checks if sum of digit factorials equals the number | `zig run src/algorithm/math/strong_number_checker.zig` |
+| Fibonacci Number Calculator | Calculates nth Fibonacci number | `zig run src/algorithm/math/fibonacci.zig` |
+| Factorial Calculator | Calculates factorial of a number | `zig run src/algorithm/math/factorial.zig` |
+| GCD and LCM Calculator | Finds Greatest Common Divisor and Least Common Multiple | `zig run src/algorithm/math/gcd_lcm_calculator.zig` |
+| Prime Factorization | Computes prime factors of a number | `zig run src/algorithm/math/prime_factorization.zig` |
+| Collatz Conjecture | Determines steps to reach 1 in Collatz sequence | `zig run src/algorithm/math/collatz_conjecture.zig` |
+| Cantor Set Generator | Generates Cantor set levels | `zig run src/algorithm/math/cantor_set.zig -- 0 1 3` |
+| Catalan Number Calculator | Calculates nth Catalan number | `zig run src/algorithm/math/catalan.zig` |
+| Euclidean Algorithm | Finds GCD and coefficients | `zig run src/algorithm/math/euclidean_algorithm_extended.zig` |
+| Linear Interpolation | Performs linear interpolation | `zig run src/algorithm/math/linear_interpolation.zig` |
+| Palindrome Number Checker | Checks if a number is a palindrome | `zig run src/algorithm/math/palindrome_number.zig` |
+| Trailing Zeros in Factorial | Counts trailing zeros in factorial | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` |
+| Prime Counter | Counts primes less than a given number | `zig run src/algorithm/math/prime_counter.zig` |
 
 ## 🚀 Prerequisites
 
