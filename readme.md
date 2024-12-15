@@ -15,23 +15,24 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 
 ## 🔢 Available Algorithms
 
-| Algorithm | Description | Command | Complexity |
-|-----------|-------------|---------|------------|
-| Prime Number Checker | Checks if a number is prime | `zig run src/algorithm/math/prime_checker.zig -- {number}` | O(sqrt(n)) |
-| Armstrong Number Checker | Verifies Armstrong numbers | `zig run src/algorithm/math/is_armstrong.zig -- {number}` | O(log(n)) |
-| Strong Number Checker | Checks if sum of digit factorials equals the number | `zig run src/algorithm/math/strong_number_checker.zig -- {number}` | O(log(n)) |
-| Fibonacci Number Calculator | Calculates nth Fibonacci number | `zig run src/algorithm/math/fibonacci.zig -- {n}` | O(n) |
-| Factorial Calculator | Calculates factorial of a number | `zig run src/algorithm/math/factorial.zig -- {number}` | O(n) |
-| GCD and LCM Calculator | Finds Greatest Common Divisor and Least Common Multiple | `zig run src/algorithm/math/gcd_lcm_calculator.zig -- {a} {b}` | O(log(min(a, b))) |
-| Prime Factorization | Computes prime factors of a number | `zig run src/algorithm/math/prime_factorization.zig -- {number}` | O(sqrt(n)) |
-| Collatz Conjecture | Determines steps to reach 1 in Collatz sequence | `zig run src/algorithm/math/collatz_conjecture.zig -- {number}` | O(log(n)) |
-| Cantor Set Generator | Generates Cantor set levels | `zig run src/algorithm/math/cantor_set.zig -- {start} {end} {levels}` | O(levels * (end - start)) |
-| Catalan Number Calculator | Calculates nth Catalan number | `zig run src/algorithm/math/catalan.zig -- {n}` | O(n^2) |
-| Euclidean Algorithm | Finds GCD and coefficients | `zig run src/algorithm/math/euclidean_algorithm_extended.zig -- {a} {b}` | O(log(min(a, b))) |
-| Linear Interpolation | Performs linear interpolation | `zig run src/algorithm/math/linear_interpolation.zig -- {x1} {y1} {x2} {y2} {x}` | O(1) |
-| Palindrome Number Checker | Checks if a number is a palindrome | `zig run src/algorithm/math/palindrome_number.zig -- {number}` | O(log(n)) |
-| Trailing Zeros in Factorial | Counts trailing zeros in factorial | `zig run src/algorithm/math/factorial_trailing_zeroes.zig -- {number}` | O(log(n)) |
-| Prime Counter | Counts primes less than a given number | `zig run src/algorithm/math/prime_counter.zig -- {number}` | O(n * log(log(n))) |
+| Algorithm | Description | Command |
+|-----------|-------------|---------|
+| Prime Number Checker | Checks if a number is prime | `zig run src/algorithm/math/prime_checker.zig` |
+| Armstrong Number Checker | Verifies Armstrong numbers | `zig run src/algorithm/math/is_armstrong.zig` |
+| Strong Number Checker | Checks if sum of digit factorials equals the number | `zig run src/algorithm/math/strong_number_checker.zig` |
+| Fibonacci Number Calculator | Calculates nth Fibonacci number | `zig run src/algorithm/math/fibonacci.zig` |
+| Factorial Calculator | Calculates factorial of a number | `zig run src/algorithm/math/factorial.zig` |
+| GCD and LCM Calculator | Finds Greatest Common Divisor and Least Common Multiple | `zig run src/algorithm/math/gcd_lcm_calculator.zig` |
+| Prime Factorization | Computes prime factors of a number | `zig run src/algorithm/math/prime_factorization.zig` |
+| Collatz Conjecture | Determines steps to reach 1 in Collatz sequence | `zig run src/algorithm/math/collatz_conjecture.zig` |
+| Cantor Set Generator | Generates Cantor set levels | `zig run src/algorithm/math/cantor_set.zig -- 0 1 3` |
+| Catalan Number Calculator | Calculates nth Catalan number | `zig run src/algorithm/math/catalan.zig` |
+| Euclidean Algorithm | Finds GCD and coefficients | `zig run src/algorithm/math/euclidean_algorithm_extended.zig` |
+| Linear Interpolation | Performs linear interpolation | `zig run src/algorithm/math/linear_interpolation.zig` |
+| Palindrome Number Checker | Checks if a number is a palindrome | `zig run src/algorithm/math/palindrome_number.zig` |
+| Trailing Zeros in Factorial | Counts trailing zeros in factorial | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` |
+| Prime Counter | Counts primes less than a given number | `zig run src/algorithm/math/prime_counter.zig` |
+
 
 **Note:** Complexity is an approximation and can vary based on implementation details.
 
