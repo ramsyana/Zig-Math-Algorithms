@@ -33,9 +33,6 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 | Trailing Zeros in Factorial | Counts trailing zeros in factorial | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` |
 | Prime Counter | Counts primes less than a given number | `zig run src/algorithm/math/prime_counter.zig` |
 
-
-**Note:** Complexity is an approximation and can vary based on implementation details.
-
 ## 🚀 Prerequisites
 - **Zig Compiler**: 
   - Latest version recommended. Install via:
