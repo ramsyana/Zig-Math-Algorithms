@@ -1,7 +1,7 @@
 //! Large Factorial Calculator Implementation
 //!
 //! This module provides functionality to calculate factorials of large numbers
-//! using array-based arithmetic to handle numbers beyond the capacity of 
+//! using dynamic array-based arithmetic to handle numbers beyond the capacity of 
 //! built-in integer types.
 //!
 //! The factorial of a non-negative integer n (denoted as n!) is the product
@@ -12,8 +12,9 @@
 //! - 5! = 5 × 4 × 3 × 2 × 1 = 120
 //! - 10! = 10 × 9 × 8 × 7 × 6 × 5 × 4 × 3 × 2 × 1 = 3,628,800
 //!
-//! The implementation uses an array to store individual digits, enabling
-//! calculation of factorials that would overflow standard integer types.
+//! The implementation uses a `std.ArrayList(u8)` to store individual digits, allowing
+//! for the calculation of factorials that would overflow standard integer types.
+//! Each digit is stored as a u8 since each digit can only range from 0 to 9.
 //!
 //! Computational Complexity:
 //! - Time Complexity: O(N * M), where N is the input number and M is the number of digits in the result
@@ -28,39 +29,44 @@
 const std = @import("std");
 const print = std.debug.print;
 
-pub fn calculateFactorial(allocator: std.mem.Allocator, N: u32) ![]u32 {
-    
-    var a = try allocator.alloc(u32, 16500);
-    @memset(a, 0);
-    a[0] = 1;
-    
-    for (2..N+1) |i| {
+// Function to calculate factorial with dynamic array size
+pub fn calculateFactorial(allocator: std.mem.Allocator, N: u32) !std.ArrayList(u8) {
+    // Start with result = 1
+    var result = try std.ArrayList(u8).initCapacity(allocator, 1);
+    errdefer result.deinit();
+    try result.append(1);
+
+    // Calculate factorial for each number from 2 to N
+    var i: u32 = 2;
+    while (i <= N) : (i += 1) {
         var carry: u32 = 0;
-        for (0..16500) |j| {
-            const product = a[j] * @as(u32, @intCast(i)) + carry;
-            a[j] = product % 10;
-            carry = product / 10;
+        var j: usize = 0;
+
+        // Multiply each existing digit by i, accumulate carry
+        while (j < result.items.len) : (j += 1) {
+            const prod = @as(u64, result.items[j]) * i + carry;
+            result.items[j] = @intCast(prod % 10);
+            carry = @intCast(prod / 10);
+        }
+
+        // Append any remaining carry digits
+        while (carry > 0) {
+            try result.append(@intCast(carry % 10));
+            carry /= 10;
         }
     }
 
-    return a;
+    // Reverse the digits to get the correct order
+    std.mem.reverse(u8, result.items);
+
+    return result;
 }
 
-pub fn printFactorial(stdout: std.fs.File.Writer, factorial_array: []u32) !void {
-    
-    var count: usize = 16499;
-    while (count > 0 and factorial_array[count] == 0) : (count -= 1) {}
-
-    if (count == 0 and factorial_array[0] == 0) {
-        try stdout.print("0\n", .{});
-        return;
-    }
-
-    var i = count;
-    while (true) {
-        try stdout.print("{d}", .{factorial_array[i]});
-        if (i == 0) break;
-        i -= 1;
+// Function to print factorial
+pub fn printFactorial(stdout: std.fs.File.Writer, factorial_array: std.ArrayList(u8)) !void {
+    // Print each digit from most significant to least significant
+    for (factorial_array.items) |digit| {
+        try stdout.print("{d}", .{digit});
     }
     try stdout.print("\n", .{});
 }
@@ -69,67 +75,50 @@ pub fn main() !void {
     const stdout = std.io.getStdOut().writer();
     const stdin = std.io.getStdIn().reader();
 
-    
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
     defer _ = gpa.deinit();
 
-    try stdout.writeAll("Enter number of test cases : ");
+    try stdout.writeAll("Enter a number: ");
 
     var buf: [100]u8 = undefined;
-    if (try stdin.readUntilDelimiterOrEof(&buf, '\n')) |line| {
-        const T = blk: {
-            const trimmed = std.mem.trimRight(u8, line, " \t\r\n");
-            break :blk try std.fmt.parseInt(u32, trimmed, 10);
+    if (try stdin.readUntilDelimiterOrEof(&buf, '\n')) |num_line| {
+        const N = blk: {
+            const trimmed = std.mem.trimRight(u8, num_line, " \t\r\n");
+            break :blk std.fmt.parseInt(u32, trimmed, 10) catch |err| {
+                try stdout.print("Error parsing number: {s}\n", .{@errorName(err)});
+                return err;
+            };
         };
 
-        var test_case: u32 = 0;
-        while (test_case < T) : (test_case += 1) {
-            try stdout.writeAll("Enter a number : ");
+        const start = std.time.milliTimestamp();
+        var factorial_array = try calculateFactorial(allocator, N);
+        defer factorial_array.deinit();
 
-            if (try stdin.readUntilDelimiterOrEof(&buf, '\n')) |num_line| {
-                const N = blk: {
-                    const trimmed = std.mem.trimRight(u8, num_line, " \t\r\n");
-                    break :blk try std.fmt.parseInt(u32, trimmed, 10);
-                };
+        try printFactorial(stdout, factorial_array);
 
-                const start = std.time.milliTimestamp();
-                const factorial_array = try calculateFactorial(allocator, N);
-                defer allocator.free(factorial_array);
-
-                try printFactorial(stdout, factorial_array);
-                
-                const duration = @as(f64, @floatFromInt(std.time.milliTimestamp() - start)) / 1000.0;
-                try stdout.print("Factorial calculation completed in {d:.3}s\n", .{duration});
-            }
-        }
+        const duration = @as(f64, @floatFromInt(std.time.milliTimestamp() - start)) / 1000.0;
+        try stdout.print("Factorial calculation completed in {d:.3}s\n", .{duration});
     }
 }
 
 test "Factorial Calculations" {
-
     const allocator = std.testing.allocator;
 
     // Test small factorials
     {
-        const factorial_5 = try calculateFactorial(allocator, 5);
-        defer allocator.free(factorial_5);
-        
+        var factorial_5 = try calculateFactorial(allocator, 5);
+        defer factorial_5.deinit();
+
         // 5! = 120
-        try std.testing.expectEqual(@as(u32, 0), factorial_5[0]);
-        try std.testing.expectEqual(@as(u32, 2), factorial_5[1]);
-        try std.testing.expectEqual(@as(u32, 1), factorial_5[2]);
-        try std.testing.expectEqual(@as(u32, 0), factorial_5[3]);
+        try std.testing.expectEqualSlices(u8, &[_]u8{1, 2, 0}, factorial_5.items);
     }
 
     // Test larger factorial
     {
-        const factorial_10 = try calculateFactorial(allocator, 10);
-        defer allocator.free(factorial_10);
+        var factorial_10 = try calculateFactorial(allocator, 10);
+        defer factorial_10.deinit();
         
-        var count: usize = 16499;
-        while (count > 0 and factorial_10[count] == 0) : (count -= 1) {}
-        
-        try std.testing.expect(count >= 6);
+        try std.testing.expect(factorial_10.items.len >= 7); // 10! has 7 digits
     }
 }

@@ -26,26 +26,37 @@ const ArrayList = std.ArrayList;
 
 pub fn calculateFactorial(allocator: std.mem.Allocator, n: i32) !ArrayList(u8) {
     if (n < 0) return error.NegativeNumber;
+    if (n == 0) {
+        var result = try ArrayList(u8).initCapacity(allocator, 1);
+        try result.append(1);
+        return result;
+    }
     
-    var result = try ArrayList(u8).initCapacity(allocator, 200);
+    const digits_float = @ceil(@log10(@as(f64, @floatFromInt(n)) * std.math.sqrt(2 * std.math.pi * @as(f64, @floatFromInt(n))) * std.math.pow(f64, @as(f64, @floatFromInt(n)) / std.math.e, @as(f64, @floatFromInt(n))) + 1/2 * std.math.log10(2 * std.math.pi * @as(f64, @floatFromInt(n)))));
+    if (digits_float > @as(f64, @floatFromInt(std.math.maxInt(usize)))) {
+        return error.Overflow;
+    }
+    const digits = @min(@as(usize, @intFromFloat(digits_float)) + 1, std.math.maxInt(usize));
+    
+    var result = try ArrayList(u8).initCapacity(allocator, digits);
     try result.append(1);
     var counter: usize = 0;
     
     var current = n;
     while (current >= 2) : (current -= 1) {
-        var temp: u32 = 0;
+        var carry: u32 = 0;
         var i: usize = 0;
         while (i <= counter) : (i += 1) {
             const curr_u32 = @as(u32, @intCast(@abs(current)));
-            temp = (result.items[i] * curr_u32) + temp;
-            result.items[i] = @intCast(temp % 10);
-            temp = temp / 10;
+            carry += result.items[i] * curr_u32;
+            result.items[i] = @intCast(carry % 10);
+            carry /= 10;
         }
 
-        while (temp > 0) {
+        while (carry > 0) {
             counter += 1;
-            try result.append(@intCast(temp % 10));
-            temp = temp / 10;
+            try result.append(@intCast(carry % 10));
+            carry /= 10;
         }
     }
     return result;
@@ -54,26 +65,30 @@ pub fn calculateFactorial(allocator: std.mem.Allocator, n: i32) !ArrayList(u8) {
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
+    defer _ = gpa.deinit();
     
     const stdout = std.io.getStdOut().writer();
-    try stdout.writeAll("Enter a whole number to Find its Factorial: ");
+    try stdout.writeAll("Enter a whole number to find its factorial: ");
 
     var buffer: [10]u8 = undefined;
     const stdin = std.io.getStdIn().reader();
-    const input = try stdin.readUntilDelimiter(&buffer, '\n');
-    const trimmed_input = std.mem.trim(u8, input, &std.ascii.whitespace);
-    const n = try std.fmt.parseInt(i32, trimmed_input, 10);
+    const input = try stdin.readUntilDelimiterOrEof(&buffer, '\n');
+    if (input) |trimmed_input| {
+        const n = std.fmt.parseInt(i32, std.mem.trim(u8, trimmed_input, &std.ascii.whitespace), 10) catch |err| {
+            try stdout.print("Invalid input: {s}\n", .{@errorName(err)});
+            return;
+        };
 
-    var result = try calculateFactorial(allocator, n);
-    defer result.deinit();
+        var result = try calculateFactorial(allocator, n);
+        defer result.deinit();
 
-    var i: usize = result.items.len - 1;
-    while (true) {
-        try stdout.print("{d}", .{result.items[i]});
-        if (i == 0) break;
-        i -= 1;
+        var i: usize = result.items.len;
+        while (i > 0) {
+            i -= 1;
+            try stdout.print("{d}", .{result.items[i]});
+        }
+        try stdout.print("\n", .{});
     }
-    try stdout.print("\n", .{});
 }
 
 test "factorial of 0" {

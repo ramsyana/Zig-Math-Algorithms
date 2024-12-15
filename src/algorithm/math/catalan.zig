@@ -21,16 +21,24 @@
 //! zig test src/algorithm/math/catalan.zig
 
 const std = @import("std");
+const Allocator = std.mem.Allocator;
 
-fn factorial(x: i64) i64 {
+fn factorial(x: u64) u64 {
     if (x <= 1) return 1;
     
-    var fac: i64 = x;
-    var i: i64 = 1;
+    var fac: u64 = x;
+    var i: u64 = 1;
     while (i < x) : (i += 1) {
-        fac = fac * (x - i);
+        fac *= (x - i);
     }
     return fac;
+}
+
+fn calculateCatalan(n: u64) f64 {
+    const f1 = factorial(2 * n);
+    const f2 = factorial(n + 1);
+    const f3 = factorial(n);
+    return @as(f64, @floatFromInt(f1)) / (@as(f64, @floatFromInt(f2)) * @as(f64, @floatFromInt(f3)));
 }
 
 pub fn main() !void {
@@ -40,48 +48,36 @@ pub fn main() !void {
     try stdout.print("Enter a number to calculate its Catalan number: ", .{});
 
     var buf: [10]u8 = undefined;
-    @memset(&buf, 0);
-    
-    const user_input = try stdin.readUntilDelimiter(&buf, '\n');
-    const input_trimmed = std.mem.trim(u8, user_input, &[_]u8{' ', '\r', '\n'});
-    
-    try stdout.print("Actual input length: {d}\n", .{input_trimmed.len});
-    try stdout.print("Input characters: ", .{});
-    for (input_trimmed) |c| {
-        try stdout.print("{d} ", .{c});
+    const user_input = try stdin.readUntilDelimiterOrEof(&buf, '\n');
+    if (user_input) |input| {
+        const input_trimmed = std.mem.trim(u8, input, &[_]u8{' ', '\r', '\n'});
+
+        if (input_trimmed.len > 0) {
+            if (std.fmt.parseInt(u64, input_trimmed, 10)) |n| {
+                if (n > 20) { // Arbitrary cutoff for this example to prevent overflow with u64
+                    try stdout.print("Number too large for calculation with current precision.\n", .{});
+                } else {
+                    const C = calculateCatalan(n);
+                    try stdout.print("{d:.2}\n", .{C});
+                }
+            } else |err| {
+                try stdout.print("Invalid input: {s}\n", .{@errorName(err)});
+            }
+        }
+    } else {
+        try stdout.print("No input provided.\n", .{});
     }
-    try stdout.print("\n", .{});
-    
-    const n = try std.fmt.parseInt(i64, input_trimmed, 10);
-    const f1 = factorial(2 * n);
-    const f2 = factorial(n + 1);
-    const f3 = factorial(n);
-    
-    const C = @as(f64, @floatFromInt(f1)) / (@as(f64, @floatFromInt(f2)) * @as(f64, @floatFromInt(f3)));
-    
-    try stdout.print("{d:.2}\n", .{C});
 }
 
 test "factorial function" {
-    try std.testing.expectEqual(@as(i64, 1), factorial(1));
-    try std.testing.expectEqual(@as(i64, 2), factorial(2));
-    try std.testing.expectEqual(@as(i64, 6), factorial(3));
-    try std.testing.expectEqual(@as(i64, 24), factorial(4));
-    try std.testing.expectEqual(@as(i64, 120), factorial(5));
+    try std.testing.expectEqual(@as(u64, 1), factorial(1));
+    try std.testing.expectEqual(@as(u64, 2), factorial(2));
+    try std.testing.expectEqual(@as(u64, 6), factorial(3));
+    try std.testing.expectEqual(@as(u64, 24), factorial(4));
+    try std.testing.expectEqual(@as(u64, 120), factorial(5));
 }
 
 test "Catalan number calculation" {
-    // Helper function to calculate Catalan number without IO
-    const calculateCatalan = struct {
-        fn calc(n: i64) f64 {
-            const f1 = factorial(2 * n);
-            const f2 = factorial(n + 1);
-            const f3 = factorial(n);
-            return @as(f64, @floatFromInt(f1)) / (@as(f64, @floatFromInt(f2)) * @as(f64, @floatFromInt(f3)));
-        }
-    }.calc;
-    
-    // First few Catalan numbers are: 1, 1, 2, 5, 14, 42, 132, ...
     try std.testing.expectApproxEqAbs(@as(f64, 1.0), calculateCatalan(0), 0.01);
     try std.testing.expectApproxEqAbs(@as(f64, 1.0), calculateCatalan(1), 0.01);
     try std.testing.expectApproxEqAbs(@as(f64, 2.0), calculateCatalan(2), 0.01);

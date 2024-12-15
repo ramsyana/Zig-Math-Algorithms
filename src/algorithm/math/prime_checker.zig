@@ -4,14 +4,14 @@
 //! A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
 //!
 //! The main function:
-//! isPrime(x: i32) -> bool
+//! isPrime(x: u32) -> bool
 //!
 //! Algorithm:
-//! 1. If the number is 2, it is prime.
-//! 2. If the number is less than 2 or divisible by 2, it is not prime.
-//! 3. Calculate the square root of the number.
-//! 4. Check divisors from 3 up to the square root of the number, skipping even numbers.
-//! 5. If any divisor evenly divides the number, it is not prime; otherwise, it is prime.
+//! 1. Numbers less than or equal to 1 are not prime.
+//! 2. 2 is prime; all other even numbers are not prime.
+//! 3. Calculate the ceiling of the square root of the number.
+//! 4. Check for divisibility by odd numbers from 3 up to the square root.
+//! 5. If any number divides evenly, the input is not prime; otherwise, it is prime.
 //!
 //! Examples:
 //! - isPrime(1) = false
@@ -23,7 +23,7 @@
 //! - Time Complexity: O(√n), where n is the input number
 //! - Space Complexity: O(1)
 //!
-//! The program also includes a simple command-line interface to input a number
+//! The program includes a command-line interface for users to input a number 
 //! and check if it's prime, displaying the result.
 //!
 //! To run the program:
@@ -35,20 +35,19 @@
 const std = @import("std");
 const math = std.math;
 
-/// Check if a given number is prime number or not
-fn isPrime(x: i32) bool {
-    if (x == 2) {
-        return true;
-    }
-    if (x < 2 or @rem(x, 2) == 0) {
-        return false;
-    }
+/// Check if a given number is prime. Uses trial division up to the square root of the number.
+/// Time complexity: O(√n)
+fn isPrime(x: u32) bool {
+    if (x <= 1) return false;
+    if (x == 2) return true;
+    if (x % 2 == 0) return false;
 
-    const squareRoot = math.floor(@sqrt(@as(f64, @floatFromInt(x))));
-
-    var i: i32 = 3;
-    while (i <= @as(i32, @intFromFloat(squareRoot))) : (i += 2) {
-        if (@rem(x, i) == 0) {
+    // Updated type conversion syntax
+    const squareRoot = @as(u32, @intFromFloat(@ceil(math.sqrt(@as(f64, @floatFromInt(x))))));
+    
+    var i: u32 = 3;
+    while (i <= squareRoot) : (i += 2) {
+        if (x % i == 0) {
             return false;
         }
     }
@@ -61,15 +60,16 @@ pub fn main() !void {
 
     try stdout.print("Enter a number to check if it's prime: ", .{});
 
-    var buf: [10]u8 = undefined;
-    @memset(&buf, 0);
+    var buf: [100]u8 = undefined;
+    const user_input = try stdin.readUntilDelimiterOrEof(&buf, '\n');
+    const input_trimmed = std.mem.trim(u8, user_input orelse return error.InvalidInput, &[_]u8{' ', '\r', '\n'});
     
-    const user_input = try stdin.readUntilDelimiter(&buf, '\n');
-    const input_trimmed = std.mem.trim(u8, user_input, &[_]u8{' ', '\r', '\n'});
-    
-    const num = try std.fmt.parseInt(i32, input_trimmed, 10);
+    const num = std.fmt.parseInt(u32, input_trimmed, 10) catch |err| {
+        try stdout.print("Error parsing input: {s}\n", .{@errorName(err)});
+        return;
+    };
     const result = isPrime(num);
-    try stdout.print("{} is {s}.\n", .{ num, if (result) "prime" else "not prime" });
+    try stdout.print("{d} is {s}.\n", .{ num, if (result) "prime" else "not prime" });
 }
 
 test "isPrime function" {
@@ -84,4 +84,7 @@ test "isPrime function" {
     try std.testing.expect(!isPrime(9));
     try std.testing.expect(!isPrime(10));
     try std.testing.expect(isPrime(11));
+    try std.testing.expect(!isPrime(100));
+    try std.testing.expect(isPrime(101));
+    try std.testing.expect(isPrime(2147483647)); // max i32 - 1, but we use u32
 }

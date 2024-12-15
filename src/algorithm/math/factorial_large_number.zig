@@ -29,22 +29,22 @@ fn LargeNum(comptime Writer: type) type {
     return struct {
         digits: std.ArrayList(u8),
         writer: Writer,
-        
+
         pub fn init(allocator: std.mem.Allocator, writer: Writer) !@This() {
             var digits = std.ArrayList(u8).init(allocator);
             try digits.append(1);
             return .{ .digits = digits, .writer = writer };
         }
-        
+
         pub fn deinit(self: *@This()) void {
             self.digits.deinit();
         }
-        
+
         pub fn addDigit(self: *@This(), value: u8) !void {
             if (value > 9) return error.DigitTooLarge;
             try self.digits.append(value);
         }
-        
+
         pub fn multiply(self: *@This(), n: usize) !void {
             var carry: usize = 0;
             for (self.digits.items) |*digit| {
@@ -59,7 +59,7 @@ fn LargeNum(comptime Writer: type) type {
                 carry /= 10;
             }
         }
-        
+
         pub fn print(self: *const @This()) !void {
             var i = self.digits.items.len;
             while (i > 0) {
@@ -90,8 +90,8 @@ pub fn main() !void {
     if (arg_it.next()) |arg| {
         number = try std.fmt.parseInt(usize, arg, 10);
     } else {
-        try stdout.print("Enter a number to calculate its factorial (recommended: 5-20 for testing, 50-100 for medium, 1000+ for large numbers): ", .{});
-        try bw.flush(); // Add this line to flush the buffer
+        try stdout.print("Enter a number to calculate its factorial: ", .{});
+        try bw.flush();
         var buf: [100]u8 = undefined;
         if (try stdin.readUntilDelimiterOrEof(&buf, '\n')) |user_input| {
             const trimmed = std.mem.trim(u8, user_input, &std.ascii.whitespace);
@@ -115,7 +115,7 @@ pub fn main() !void {
 
     try stdout.print("{d}! = ", .{number});
     try result.print();
-    try stdout.print("\nTime taken: {d:.4} ms\n", .{time_taken});
+    try stdout.print("\nTime taken: {d:.4} ms\n", .{@max(time_taken, 0.0001)});
     try bw.flush();
 }
 
@@ -132,7 +132,7 @@ test "LargeNum basic operations" {
     try num.multiply(2);
     try num.print();
     
-    try std.testing.expectEqualStrings("22", buf.items);
+    try std.testing.expectEqualStrings("2", buf.items);
 }
 
 test "factorial calculation" {

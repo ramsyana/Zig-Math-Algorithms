@@ -1,67 +1,65 @@
-//! Fast Fibonacci Number Calculator Implementation
+//! Fibonacci Calculator Using Matrix Exponentiation
 //!
-//! This module implements a fast, recursive Fibonacci calculator using the matrix
-//! exponentiation method. Due to i64 size limitations, it can calculate up to the
-//! 92nd Fibonacci number accurately.
+//! This module provides an efficient implementation of Fibonacci number calculation using
+//! the matrix exponentiation method, which reduces computational complexity from O(2^n)
+//! to O(log n).
 //!
-//! The implementation uses the following formula for efficient calculation:
-//! If k = n/2, then:
-//! F(n) = F(k) * [2*F(k+1) - F(k)] for even n
-//! F(n) = F(k+1)^2 + F(k)^2 for odd n
+//! - **Input Range**: Supports integers from 0 to 92 due to `i64` limitations.
+//! - **Algorithm**: Utilizes fast doubling to compute Fibonacci numbers:
+//!   - For even `n` where `k = n/2`: `F(n) = F(k) * (2*F(k+1) - F(k))`
+//!   - For odd `n`: `F(n) = F(k+1)^2 + F(k)^2`
+//! - **Time Complexity**: O(log n)
+//! - **Space Complexity**: O(log n) due to the recursion depth in the stack
 //!
-//! Time Complexity: O(log n)
-//! Space Complexity: O(log n) due to recursion stack
-//!
-//! Examples:
+//! **Examples**:
 //! - Input: 5  -> Output: 5
 //! - Input: 50 -> Output: 12586269025
 //! - Input: 91 -> Output: 4660046610375530309
 //!
-//! To run the code:
-//! zig run src/algorithm/math/fibonacci_fast.zig
+//! **Usage**:
+//! - Run the program: `zig run src/algorithm/math/fibonacci_fast.zig`
+//! - Run tests: `zig test src/algorithm/math/fibonacci_fast.zig`
 //!
-//! To test the code:
-//! zig test src/algorithm/math/fibonacci_fast.zig
+//! Note: The maximum calculable Fibonacci number is limited by the `i64` type, hence the
+//! upper bound of 92 for input `n`.
 
 const std = @import("std");
 
 fn fib(n: i32) !i64 {
     if (n < 0) return error.NegativeInput;
-    if (n > 92) return error.Overflow;
+    if (n > 92) return error.FibNumberTooLarge;
 
-    var c: i64 = undefined;
-    var d: i64 = undefined;
-    fibHelper(@intCast(n), &c, &d) catch |err| {
-        return err;
-    };
-    return c;
+    var fib_a: i64 = undefined;
+    var fib_b: i64 = undefined;
+    try fibMatrixExponentiation(@intCast(n), &fib_a, &fib_b);
+    return fib_a;
 }
 
-fn fibHelper(n: u32, c: *i64, d: *i64) !void {
+fn fibMatrixExponentiation(n: u32, fib_a: *i64, fib_b: *i64) !void {
     if (n == 0) {
-        c.* = 0;
-        d.* = 1;
+        fib_a.* = 0;
+        fib_b.* = 1;
         return;
     }
 
-    var t1: i64 = undefined;
-    var t2: i64 = undefined;
-    try fibHelper(n >> 1, &t1, &t2);
+    var temp_a: i64 = undefined;
+    var temp_b: i64 = undefined;
+    try fibMatrixExponentiation(n >> 1, &temp_a, &temp_b);
 
-    const t2_doubled = std.math.mul(i64, t2, 2) catch return error.Overflow;
-    const t2d_minus_t1 = std.math.sub(i64, t2_doubled, t1) catch return error.Overflow;
-    const a = std.math.mul(i64, t1, t2d_minus_t1) catch return error.Overflow;
+    const doubled_b = try std.math.mul(i64, temp_b, 2);
+    const b_minus_a = try std.math.sub(i64, doubled_b, temp_a);
+    const new_a = try std.math.mul(i64, temp_a, b_minus_a);
     
-    const t1_squared = std.math.mul(i64, t1, t1) catch return error.Overflow;
-    const t2_squared = std.math.mul(i64, t2, t2) catch return error.Overflow;
-    const b = std.math.add(i64, t1_squared, t2_squared) catch return error.Overflow;
+    const a_squared = try std.math.mul(i64, temp_a, temp_a);
+    const b_squared = try std.math.mul(i64, temp_b, temp_b);
+    const new_b = try std.math.add(i64, a_squared, b_squared);
 
     if (n % 2 == 0) {
-        c.* = a;
-        d.* = b;
+        fib_a.* = new_a;
+        fib_b.* = new_b;
     } else {
-        c.* = b;
-        d.* = std.math.add(i64, a, b) catch return error.Overflow;
+        fib_a.* = new_b;
+        fib_b.* = try std.math.add(i64, new_a, new_b);
     }
 }
 
@@ -79,8 +77,8 @@ pub fn main() !void {
         
         const start = std.time.milliTimestamp();
         const result = fib(n) catch |err| switch (err) {
-            error.Overflow => {
-                try stdout.print("Error: Input too large (max n=92)\n", .{});
+            error.FibNumberTooLarge => {
+                try stdout.print("Error: Fibonacci number too large for i64 (max n=92)\n", .{});
                 return;
             },
             error.NegativeInput => {

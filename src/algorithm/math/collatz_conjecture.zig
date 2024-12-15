@@ -10,15 +10,14 @@
 //! - Input: n=10 -> Sequence: 10->5->16->8->4->2->1
 //! - Input: n=27 -> Sequence reaches 9232 before eventually descending to 1
 //!
-//! To run the code, use the following command:
-//! zig run src/algorithm/math/collatz_conjecture.zig
-//! 
-//! To test the code, use the following command:
-//! zig test src/algorithm/math/collatz_conjecture.zig
+//! **Usage:**
+//! - To run the code, use: `zig run src/algorithm/math/collatz_conjecture.zig`
+//! - To test the code, use: `zig test src/algorithm/math/collatz_conjecture.zig`
 //!
 //! Reference: https://en.wikipedia.org/wiki/Collatz_conjecture
 
 const std = @import("std");
+
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
@@ -34,13 +33,19 @@ pub fn main() !void {
     _ = args.skip();
 
     if (args.next()) |arg| {
-        n = try std.fmt.parseInt(u64, arg, 10);
+        n = parseNumber(arg) catch |err| {
+            try stdout.print("Error parsing argument: {s}\n", .{@errorName(err)});
+            return;
+        };
     } else {
         try stdout.writeAll("Enter starting number: ");
         var buf: [20]u8 = undefined;
         const user_input = try stdin.readUntilDelimiter(&buf, '\n');
         const trimmed = std.mem.trim(u8, user_input, &std.ascii.whitespace);
-        n = try std.fmt.parseInt(u64, trimmed, 10);
+        n = parseNumber(trimmed) catch |err| {
+            try stdout.print("Error parsing input: {s}\n", .{@errorName(err)});
+            return;
+        };
     }
 
     var curr_no: u64 = n;
@@ -74,6 +79,16 @@ fn calculateCollatzSteps(n: u64) u64 {
         }
     }
     return num_steps;
+}
+
+// Helper function to parse a string to a u64 number, with better error handling
+fn parseNumber(str: []const u8) !u64 {
+    return std.fmt.parseInt(u64, str, 10) catch |err| {
+        return switch (err) {
+            error.Overflow => error.NumberTooLarge,
+            else => err,
+        };
+    };
 }
 
 test "Collatz sequence for known values" {

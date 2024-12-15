@@ -43,7 +43,6 @@
 
 const std = @import("std");
 
-// Function to calculate x raised to the power y
 fn power(x: i32, y: u32) i32 {
     if (y == 0) return 1;
     if (y % 2 == 0) {
@@ -54,7 +53,6 @@ fn power(x: i32, y: u32) i32 {
     return x * half * half;
 }
 
-// Function to calculate order of the number
 fn order(x: i32) i32 {
     var n: i32 = 0;
     var num = x;
@@ -65,7 +63,6 @@ fn order(x: i32) i32 {
     return n;
 }
 
-// Function to check whether the given number is Armstrong number or not
 fn isArmstrong(x: i32) bool {
     const n = order(x);
     var temp = x;
@@ -92,13 +89,14 @@ pub fn main() !void {
         // Trim the input to remove whitespace and newline
         const trimmed_input = std.mem.trim(u8, user_input, &std.ascii.whitespace);
         
-        // Parse the trimmed input string to an integer
-        const number = try std.fmt.parseInt(i32, trimmed_input, 10);
-        
-        if (isArmstrong(number)) {
-            try stdout.print("{d} is an Armstrong number\n", .{number});
-        } else {
-            try stdout.print("{d} is not an Armstrong number\n", .{number});
+        if (std.fmt.parseInt(i32, trimmed_input, 10)) |number| {
+            if (isArmstrong(number)) {
+                try stdout.print("{d} is an Armstrong number\n", .{number});
+            } else {
+                try stdout.print("{d} is not an Armstrong number\n", .{number});
+            }
+        } else |_| {
+            try stdout.writeAll("Invalid input. Please enter a number.\n");
         }
     }
 }
