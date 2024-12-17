@@ -32,6 +32,7 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 | Palindrome Number Checker | Checks if a number is a palindrome | `zig run src/algorithm/math/palindrome_number.zig` |
 | Trailing Zeros in Factorial | Counts trailing zeros in factorial | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` |
 | Prime Counter | Counts primes less than a given number | `zig run src/algorithm/math/prime_counter.zig` |
+| Binomial Coefficient Calculator | Calculates binomial coefficients using Pascal's triangle | `zig run src/algorithm/math/binomial_coefficient.zig` |
 
 ## 🚀 Prerequisites
 - **Zig Compiler**: 
