@@ -47,7 +47,9 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 To run any algorithm, use the Zig run command followed by the specific algorithm file path and any required arguments. For example:
 
 ```shell
-zig run src/algorithm/math/prime_checker.zig -- 17
+zig run src/algorithm/math/prime_checker.zig
+# or
+zig test src/algorithm/math/prime_checker.zig
 ```
 
 More information is available in the respective file comment header.
