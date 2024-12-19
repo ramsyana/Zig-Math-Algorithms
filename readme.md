@@ -3,6 +3,7 @@
 A collection of mathematical algorithms implemented in Zig, designed for educational purposes and showcasing Zig's performance.
 
 ## 🚀 Table of Contents
+
 - [Zig Math Algorithms](#zig-math-algorithms)
   - [🚀 Table of Contents](#-table-of-contents)
   - [🔢 Available Algorithms](#-available-algorithms)
@@ -14,6 +15,8 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
   - [📧 Contact](#-contact)
 
 ## 🔢 Available Algorithms
+
+Here's the table with Euler's Totient Function added:
 
 | Algorithm | Description | Command |
 |-----------|-------------|---------|
@@ -33,6 +36,7 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 | Trailing Zeros in Factorial | Counts trailing zeros in factorial | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` |
 | Prime Counter | Counts primes less than a given number | `zig run src/algorithm/math/prime_counter.zig` |
 | Binomial Coefficient Calculator | Calculates binomial coefficients using Pascal's triangle | `zig run src/algorithm/math/binomial_coefficient.zig` |
+| Euler's Totient Function | Counts numbers less than n that are coprime to n | `zig run src/algorithm/math/euler_totient.zig` |
 
 ## 🚀 Prerequisites
 - **Zig Compiler**: 
