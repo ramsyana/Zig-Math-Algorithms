@@ -98,6 +98,6 @@ Contributions are welcome! Here's how to contribute:
 
 Ramsyana - ramsyana[at]mac[dot]com
 
-I'm a full-time full-stack developer and system engineering enthusiast. Feel free to fork, clone, open issues, or contribute to this project. Don’t hesitate to reach out with any questions, suggestions, or collaboration ideas!
+I'm a system engineering enthusiast. Feel free to fork, clone, open issues, or contribute to this project. Don’t hesitate to reach out with any questions, suggestions, or collaboration ideas!
 
 
