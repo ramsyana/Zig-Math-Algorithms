@@ -37,6 +37,7 @@ Here's the table with Euler's Totient Function added:
 | Prime Counter | Counts primes less than a given number | `zig run src/algorithm/math/prime_counter.zig` |
 | Binomial Coefficient Calculator | Calculates binomial coefficients using Pascal's triangle | `zig run src/algorithm/math/binomial_coefficient.zig` |
 | Euler's Totient Function | Counts numbers less than n that are coprime to n | `zig run src/algorithm/math/euler_totient.zig` |
+| Chinese Remainder Theorem | Solves system of linear congruences | `zig run src/algorithm/math/chinese_remainder.zig` |
 
 ## 🚀 Prerequisites
 - **Zig Compiler**: 
