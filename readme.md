@@ -25,6 +25,7 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 | Factorial Calculator | Calculates factorial of a number | `zig run src/algorithm/math/factorial.zig` | Easy |
 | Palindrome Number Checker | Checks if a number is a palindrome | `zig run src/algorithm/math/palindrome_number.zig` | Easy |
 | Perfect Number Checker | Checks if a number is perfect (equal to the sum of its proper divisors) | `zig run src/algorithm/math/perfect_number_checker.zig` | Easy |
+| Abundant/Deficient Number Checker | Checks if a number is abundant (sum of proper divisors > number) or deficient (sum < number) | `zig run src/algorithm/math/abundant_deficient_checker.zig` | Easy |
 | GCD and LCM Calculator | Finds Greatest Common Divisor and Least Common Multiple | `zig run src/algorithm/math/gcd_lcm_calculator.zig` | Medium |
 | Prime Factorization | Computes prime factors of a number | `zig run src/algorithm/math/prime_factorization.zig` | Medium |
 | Collatz Conjecture | Determines steps to reach 1 in Collatz sequence | `zig run src/algorithm/math/collatz_conjecture.zig` | Medium |
