@@ -16,28 +16,27 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 
 ## 🔢 Available Algorithms
 
-Here's the table with Euler's Totient Function added:
-
-| Algorithm | Description | Command |
-|-----------|-------------|---------|
-| Prime Number Checker | Checks if a number is prime | `zig run src/algorithm/math/prime_checker.zig` |
-| Armstrong Number Checker | Verifies Armstrong numbers | `zig run src/algorithm/math/is_armstrong.zig` |
-| Strong Number Checker | Checks if sum of digit factorials equals the number | `zig run src/algorithm/math/strong_number_checker.zig` |
-| Fibonacci Number Calculator | Calculates nth Fibonacci number | `zig run src/algorithm/math/fibonacci.zig` |
-| Factorial Calculator | Calculates factorial of a number | `zig run src/algorithm/math/factorial.zig` |
-| GCD and LCM Calculator | Finds Greatest Common Divisor and Least Common Multiple | `zig run src/algorithm/math/gcd_lcm_calculator.zig` |
-| Prime Factorization | Computes prime factors of a number | `zig run src/algorithm/math/prime_factorization.zig` |
-| Collatz Conjecture | Determines steps to reach 1 in Collatz sequence | `zig run src/algorithm/math/collatz_conjecture.zig` |
-| Cantor Set Generator | Generates Cantor set levels | `zig run src/algorithm/math/cantor_set.zig -- 0 1 3` |
-| Catalan Number Calculator | Calculates nth Catalan number | `zig run src/algorithm/math/catalan.zig` |
-| Euclidean Algorithm | Finds GCD and coefficients | `zig run src/algorithm/math/euclidean_algorithm_extended.zig` |
-| Linear Interpolation | Performs linear interpolation | `zig run src/algorithm/math/linear_interpolation.zig` |
-| Palindrome Number Checker | Checks if a number is a palindrome | `zig run src/algorithm/math/palindrome_number.zig` |
-| Trailing Zeros in Factorial | Counts trailing zeros in factorial | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` |
-| Prime Counter | Counts primes less than a given number | `zig run src/algorithm/math/prime_counter.zig` |
-| Binomial Coefficient Calculator | Calculates binomial coefficients using Pascal's triangle | `zig run src/algorithm/math/binomial_coefficient.zig` |
-| Euler's Totient Function | Counts numbers less than n that are coprime to n | `zig run src/algorithm/math/euler_totient.zig` |
-| Chinese Remainder Theorem | Solves system of linear congruences | `zig run src/algorithm/math/chinese_remainder.zig` |
+| Algorithm | Description | Command | Difficulty |
+|-----------|-------------|---------|------------|
+| Prime Number Checker | Checks if a number is prime | `zig run src/algorithm/math/prime_checker.zig` | Easy |
+| Armstrong Number Checker | Verifies Armstrong numbers | `zig run src/algorithm/math/is_armstrong.zig` | Easy |
+| Strong Number Checker | Checks if sum of digit factorials equals the number | `zig run src/algorithm/math/strong_number_checker.zig` | Easy |
+| Fibonacci Number Calculator | Calculates nth Fibonacci number | `zig run src/algorithm/math/fibonacci.zig` | Easy |
+| Factorial Calculator | Calculates factorial of a number | `zig run src/algorithm/math/factorial.zig` | Easy |
+| Palindrome Number Checker | Checks if a number is a palindrome | `zig run src/algorithm/math/palindrome_number.zig` | Easy |
+| Perfect Number Checker | Checks if a number is perfect (equal to the sum of its proper divisors) | `zig run src/algorithm/math/perfect_number_checker.zig` | Easy |
+| GCD and LCM Calculator | Finds Greatest Common Divisor and Least Common Multiple | `zig run src/algorithm/math/gcd_lcm_calculator.zig` | Medium |
+| Prime Factorization | Computes prime factors of a number | `zig run src/algorithm/math/prime_factorization.zig` | Medium |
+| Collatz Conjecture | Determines steps to reach 1 in Collatz sequence | `zig run src/algorithm/math/collatz_conjecture.zig` | Medium |
+| Trailing Zeros in Factorial | Counts trailing zeros in factorial | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` | Medium |
+| Prime Counter | Counts primes less than a given number | `zig run src/algorithm/math/prime_counter.zig` | Medium |
+| Binomial Coefficient Calculator | Calculates binomial coefficients using Pascal's triangle | `zig run src/algorithm/math/binomial_coefficient.zig` | Medium |
+| Cantor Set Generator | Generates Cantor set levels | `zig run src/algorithm/math/cantor_set.zig -- 0 1 3` | Hard |
+| Catalan Number Calculator | Calculates nth Catalan number | `zig run src/algorithm/math/catalan.zig` | Hard |
+| Euclidean Algorithm | Finds GCD and coefficients | `zig run src/algorithm/math/euclidean_algorithm_extended.zig` | Hard |
+| Linear Interpolation | Performs linear interpolation | `zig run src/algorithm/math/linear_interpolation.zig` | Hard |
+| Euler's Totient Function | Counts numbers less than n that are coprime to n | `zig run src/algorithm/math/euler_totient.zig` | Hard |
+| Chinese Remainder Theorem | Solves system of linear congruences | `zig run src/algorithm/math/chinese_remainder.zig` | Hard |
 
 ## 🚀 Prerequisites
 - **Zig Compiler**: 
