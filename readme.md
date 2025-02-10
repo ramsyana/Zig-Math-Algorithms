@@ -30,6 +30,7 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 | Integer Square Root | Finds floor(√n) | `zig run src/algorithm/math/integer_sqrt.zig` | Easy |
 | Leap Year Checker | Determines if year is leap | `zig run src/algorithm/math/leap_year_checker.zig` | Easy |
 | **Number Theory** |
+| Sieve of Eratosthenes | Generates prime numbers efficiently | `zig run src/algorithm/math/sieve_of_eratosthenes.zig` | Medium |
 | Perfect Number Checker | Checks if a number is perfect | `zig run src/algorithm/math/perfect_number_checker.zig` | Easy |
 | Abundant/Deficient Checker | Checks if number is abundant/deficient | `zig run src/algorithm/math/abundant_deficient_checker.zig` | Easy |
 | Strong Number Checker | Sum of digit factorials check | `zig run src/algorithm/math/strong_number_checker.zig` | Easy |
