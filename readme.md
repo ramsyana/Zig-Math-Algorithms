@@ -38,6 +38,7 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 | Prime Factorization | Computes prime factors | `zig run src/algorithm/math/prime_factorization.zig` | Medium |
 | Prime Counter | Counts primes up to n | `zig run src/algorithm/math/prime_counter.zig` | Medium |
 | Euler's Totient Function | Counts coprime numbers | `zig run src/algorithm/math/euler_totient.zig` | Hard |
+| Fermat's Factorization 🆕 | Factors integers using difference of squares | `zig run src/algorithm/math/fermats_factorization.zig` | Medium |
 | **Sequences and Series** |
 | Fibonacci Calculator | Calculates nth Fibonacci | `zig run src/algorithm/math/fibonacci.zig` | Easy |
 | Lucas Numbers | Generates Lucas numbers | `zig run src/algorithm/math/lucas_numbers.zig` | Easy |
