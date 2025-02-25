@@ -39,6 +39,7 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 | Prime Counter | Counts primes up to n | `zig run src/algorithm/math/prime_counter.zig` | Medium |
 | Euler's Totient Function | Counts coprime numbers | `zig run src/algorithm/math/euler_totient.zig` | Hard |
 | Fermat's Factorization 🆕 | Factors integers using difference of squares | `zig run src/algorithm/math/fermats_factorization.zig` | Medium |
+| Modular Exponentiation 🆕 | Efficiently computes (base^exp) % mod | `zig run src/algorithm/math/modular_exponentiation.zig` | Medium |
 | **Sequences and Series** |
 | Fibonacci Calculator | Calculates nth Fibonacci | `zig run src/algorithm/math/fibonacci.zig` | Easy |
 | Lucas Numbers | Generates Lucas numbers | `zig run src/algorithm/math/lucas_numbers.zig` | Easy |
@@ -47,13 +48,15 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 | Trailing Zeros in Factorial | Counts trailing zeros in n! | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` | Medium |
 | Collatz Conjecture | Steps to reach 1 | `zig run src/algorithm/math/collatz_conjecture.zig` | Medium |
 | Catalan Calculator | Calculates nth Catalan | `zig run src/algorithm/math/catalan.zig` | Hard |
+| Pascal's Triangle 🆕 | Generates Pascal's triangle up to n rows | `zig run src/algorithm/math/pascals_triangle.zig` | Easy |
 | **Advanced Mathematics** |
 | Binomial Coefficient | Pascal's triangle coefficients | `zig run src/algorithm/math/binomial_coefficient.zig` | Medium |
 | Cantor Set Generator | Generates Cantor set | `zig run src/algorithm/math/cantor_set.zig -- 0 1 3` | Hard |
 | Extended Euclidean | GCD and Bézout coefficients | `zig run src/algorithm/math/euclidean_algorithm_extended.zig` | Hard |
 | Linear Interpolation | Linear interpolation | `zig run src/algorithm/math/linear_interpolation.zig` | Hard |
 | Chinese Remainder | Solves linear congruences | `zig run src/algorithm/math/chinese_remainder.zig` | Hard |
-
+| Karatsuba Multiplication 🆕 | Efficient multiplication algorithm | `zig run src/algorithm/math/karatsuba.zig` | Hard |
+| Fast Fourier Transform 🆕 | Computes the FFT of a sequence | `zig run src/algorithm/math/fft.zig` | Hard |
 ## 🚀 Prerequisites
 
 - **Zig Compiler**: 
