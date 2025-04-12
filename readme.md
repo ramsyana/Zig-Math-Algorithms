@@ -54,6 +54,7 @@ Here is the updated markdown table with the **Time Complexity** column removed:
 | Extended Euclidean | GCD and Bézout coefficients | `zig run src/algorithm/math/euclidean_algorithm_extended.zig` | Hard |
 | Linear Interpolation | Linear interpolation | `zig run src/algorithm/math/linear_interpolation.zig` | Hard |
 | Chinese Remainder | Solves linear congruences | `zig run src/algorithm/math/chinese_remainder.zig` | Hard |
+| Monte Carlo Pi | Estimates π using Monte Carlo simulation | `zig run src/algorithm/math/monte_carlo_pi.zig` | Medium |
 | Quadratic Solver | Solves quadratic equations (ax² + bx + c = 0) | `zig run src/algorithm/math/quadratic_solver.zig` | Medium |
 
 ## 🚀 Prerequisites
