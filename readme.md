@@ -21,41 +21,41 @@ Here is the updated markdown table with the **Time Complexity** column removed:
 | Algorithm | Description | Command | Difficulty |
 |-----------|-------------|---------|------------|
 | **Basic Number Operations** |
-| Prime Number Checker | Checks if a number is prime | `zig run src/algorithm/math/prime_checker.zig` | Easy |
 | Armstrong Number Checker | Verifies Armstrong numbers | `zig run src/algorithm/math/is_armstrong.zig` | Easy |
-| Happy Number Checker | Checks if a number is happy | `zig run src/algorithm/math/happy_number.zig` | Easy |
-| Palindrome Number Checker | Checks if a number is a palindrome | `zig run src/algorithm/math/palindrome_number.zig` | Easy |
-| Sum of Digits | Calculates digit sum | `zig run src/algorithm/math/sum_of_digits.zig` | Easy |
 | Digital Root | Recursive digit sum calculation | `zig run src/algorithm/math/digital_root.zig` | Easy |
-| Reverse Number | Reverses digits of a number | `zig run src/algorithm/math/reverse_number.zig` | Easy |
-| Power of Two Checker | Checks if number is 2ⁿ | `zig run src/algorithm/math/power_of_two.zig` | Easy |
+| Happy Number Checker | Checks if a number is happy | `zig run src/algorithm/math/happy_number.zig` | Easy |
 | Integer Square Root | Finds floor(√n) | `zig run src/algorithm/math/integer_sqrt.zig` | Easy |
 | Leap Year Checker | Determines if year is leap | `zig run src/algorithm/math/leap_year_checker.zig` | Easy |
+| Palindrome Number Checker | Checks if a number is a palindrome | `zig run src/algorithm/math/palindrome_number.zig` | Easy |
+| Power of Two Checker | Checks if number is 2ⁿ | `zig run src/algorithm/math/power_of_two.zig` | Easy |
+| Prime Number Checker | Checks if a number is prime | `zig run src/algorithm/math/prime_checker.zig` | Easy |
+| Reverse Number | Reverses digits of a number | `zig run src/algorithm/math/reverse_number.zig` | Easy |
+| Sum of Digits | Calculates digit sum | `zig run src/algorithm/math/sum_of_digits.zig` | Easy |
 | **Number Theory** |
-| Perfect Number Checker | Checks if a number is perfect | `zig run src/algorithm/math/perfect_number_checker.zig` | Easy |
 | Abundant/Deficient Checker | Checks if number is abundant/deficient | `zig run src/algorithm/math/abundant_deficient_checker.zig` | Easy |
+| Perfect Number Checker | Checks if a number is perfect | `zig run src/algorithm/math/perfect_number_checker.zig` | Easy |
 | Strong Number Checker | Sum of digit factorials check | `zig run src/algorithm/math/strong_number_checker.zig` | Easy |
 | GCD and LCM Calculator | Finds GCD and LCM | `zig run src/algorithm/math/gcd_lcm_calculator.zig` | Medium |
-| Prime Factorization | Computes prime factors | `zig run src/algorithm/math/prime_factorization.zig` | Medium |
 | Prime Counter | Counts primes up to n | `zig run src/algorithm/math/prime_counter.zig` | Medium |
+| Prime Factorization | Computes prime factors | `zig run src/algorithm/math/prime_factorization.zig` | Medium |
 | Euler's Totient Function | Counts coprime numbers | `zig run src/algorithm/math/euler_totient.zig` | Hard |
 | **Sequences and Series** |
+| Factorial Calculator | Calculates n! | `zig run src/algorithm/math/factorial.zig` | Easy |
 | Fibonacci Calculator | Calculates nth Fibonacci | `zig run src/algorithm/math/fibonacci.zig` | Easy |
 | Lucas Numbers | Generates Lucas numbers | `zig run src/algorithm/math/lucas_numbers.zig` | Easy |
-| Factorial Calculator | Calculates n! | `zig run src/algorithm/math/factorial.zig` | Easy |
 | Sequence Generator | Arithmetic/Geometric sequences | `zig run src/algorithm/math/sequence_generator.zig` | Easy |
-| Trailing Zeros in Factorial | Counts trailing zeros in n! | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` | Medium |
 | Collatz Conjecture | Steps to reach 1 | `zig run src/algorithm/math/collatz_conjecture.zig` | Medium |
+| Trailing Zeros in Factorial | Counts trailing zeros in n! | `zig run src/algorithm/math/factorial_trailing_zeroes.zig` | Medium |
 | Catalan Calculator | Calculates nth Catalan | `zig run src/algorithm/math/catalan.zig` | Hard |
 | **Advanced Mathematics** |
-| Matrix Multiplication | Performs matrix multiplication | `zig run src/algorithm/math/matrix_multiplication.zig` | Medium |
 | Binomial Coefficient | Pascal's triangle coefficients | `zig run src/algorithm/math/binomial_coefficient.zig` | Medium |
-| Cantor Set Generator | Generates Cantor set | `zig run src/algorithm/math/cantor_set.zig -- 0 1 3` | Hard |
-| Extended Euclidean | GCD and Bézout coefficients | `zig run src/algorithm/math/euclidean_algorithm_extended.zig` | Hard |
-| Linear Interpolation | Linear interpolation | `zig run src/algorithm/math/linear_interpolation.zig` | Hard |
-| Chinese Remainder | Solves linear congruences | `zig run src/algorithm/math/chinese_remainder.zig` | Hard |
+| Matrix Multiplication | Performs matrix multiplication | `zig run src/algorithm/math/matrix_multiplication.zig` | Medium |
 | Monte Carlo Pi | Estimates π using Monte Carlo simulation | `zig run src/algorithm/math/monte_carlo_pi.zig` | Medium |
 | Quadratic Solver | Solves quadratic equations (ax² + bx + c = 0) | `zig run src/algorithm/math/quadratic_solver.zig` | Medium |
+| Cantor Set Generator | Generates Cantor set | `zig run src/algorithm/math/cantor_set.zig -- 0 1 3` | Hard |
+| Chinese Remainder | Solves linear congruences | `zig run src/algorithm/math/chinese_remainder.zig` | Hard |
+| Extended Euclidean | GCD and Bézout coefficients | `zig run src/algorithm/math/euclidean_algorithm_extended.zig` | Hard |
+| Linear Interpolation | Linear interpolation | `zig run src/algorithm/math/linear_interpolation.zig` | Hard |
 
 ## 🚀 Prerequisites
 
