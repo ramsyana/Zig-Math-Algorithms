@@ -10,7 +10,6 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
   - [🚀 Prerequisites](#-prerequisites)
   - [🔧 Running the Algorithms](#-running-the-algorithms)
   - [📚 Purpose](#-purpose)
-  - [📝 License](#-license)
   - [🤝 Contributing](#-contributing)
   - [📧 Contact](#-contact)
 
