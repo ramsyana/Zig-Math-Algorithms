@@ -16,8 +16,6 @@ A collection of mathematical algorithms implemented in Zig, designed for educati
 
 ## 🔢 Available Algorithms
 
-Here is the updated markdown table with the **Time Complexity** column removed:
-
 | Algorithm | Description | Command | Difficulty |
 |-----------|-------------|---------|------------|
 | **Basic Number Operations** |
